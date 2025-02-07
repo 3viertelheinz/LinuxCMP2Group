@@ -14,9 +14,7 @@ Write-Host "Computer $ComputerName created in OU $ComputerOU."
 # Check if the group exists
 $Group = Get-ADGroup -Filter { Name -eq $GroupName } -SearchBase $GroupOU -ErrorAction SilentlyContinue
 
-if ($Group) {
-    Write-Host "Group $GroupName already exists in OU $GroupOU."
-} else {
+if ($Group -ne $null) {
     # Create the group if it does not exist
     New-ADGroup -Name $GroupName -GroupScope Global -Path $GroupOU
     Write-Host "Group $GroupName created in OU $GroupOU."
